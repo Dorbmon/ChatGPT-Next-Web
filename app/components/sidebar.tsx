@@ -12,7 +12,7 @@ import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import DragIcon from "../icons/drag.svg";
 import DiscoveryIcon from "../icons/discovery.svg";
-
+import { FaMountain } from "react-icons/fa";
 import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
@@ -186,6 +186,7 @@ export function SideBarHeader(props: {
             <div className={styles["sidebar-sub-title"]}>{subTitle}</div>
           </div>
           <div className={clsx(styles["sidebar-logo"], "no-dark")}>{logo}</div>
+          <div>Build at {process.env.NEXT_PUBLIC_BUILD_TIME!}</div>
         </a>
       </div>
       {children}
@@ -257,6 +258,13 @@ export function SideBar(props: { className?: string }) {
         shouldNarrow={shouldNarrow}
       >
         <div className={styles["sidebar-header-bar"]}>
+          <IconButton
+            icon={<FaMountain></FaMountain>}
+            text="Draw"
+            onClick={() => {
+              navigate(Path.Draw, {});
+            }}
+          ></IconButton>
           <IconButton
             icon={<MaskIcon />}
             text={shouldNarrow ? undefined : Locale.Mask.Name}

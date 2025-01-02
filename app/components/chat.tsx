@@ -1054,6 +1054,7 @@ function _Chat() {
   };
 
   const doSubmit = (userInput: string) => {
+    toast("刘子阳真是爱江晨成！！！");
     if (userInput.trim() === "" && isEmpty(attachImages)) return;
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
@@ -2043,7 +2044,6 @@ function _Chat() {
                   className={styles["chat-input-send"]}
                   type="primary"
                   onClick={() => {
-                    toast("刘子阳真是爱江晨成！！！");
                     doSubmit(userInput);
                   }}
                 />

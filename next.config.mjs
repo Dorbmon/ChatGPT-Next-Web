@@ -8,6 +8,9 @@ console.log("[Next] build with chunk: ", !disableChunk);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -71,8 +74,10 @@ if (mode !== "export") {
       // },
       {
         // https://{resource_name}.openai.azure.com/openai/deployments/{deploy_name}/chat/completions
-        source: "/api/proxy/azure/:resource_name/deployments/:deploy_name/:path*",
-        destination: "https://:resource_name.openai.azure.com/openai/deployments/:deploy_name/:path*",
+        source:
+          "/api/proxy/azure/:resource_name/deployments/:deploy_name/:path*",
+        destination:
+          "https://:resource_name.openai.azure.com/openai/deployments/:deploy_name/:path*",
       },
       {
         source: "/api/proxy/google/:path*",
@@ -99,7 +104,7 @@ if (mode !== "export") {
         destination: "https://dashscope.aliyuncs.com/api/:path*",
       },
     ];
-    
+
     return {
       beforeFiles: ret,
     };
