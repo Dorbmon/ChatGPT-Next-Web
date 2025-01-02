@@ -1509,7 +1509,29 @@ function _Chat() {
     images.push(...attachImages);
 
     images.push(
-      ...(await new Promise<string[]>((res, rej) => {
+      ...(await new Promise<string[]>(async (res, rej) => {
+        if (
+          "mediaDevices" in navigator &&
+          "getUserMedia" in navigator.mediaDevices
+        ) {
+          // 浏览器支持 getUserMedia
+          alert("support");
+        }
+        let preferredDeviceId = undefined;
+        const availableDevices =
+          await navigator.mediaDevices.enumerateDevices();
+        if (availableDevices.length > 1)
+          for (let d of availableDevices) {
+            console.log(d.label);
+            if (d.label.includes("FaceTime")) preferredDeviceId = d.deviceId;
+          }
+        console.log(preferredDeviceId);
+        await navigator.mediaDevices.getUserMedia({
+          video: {
+            deviceId: preferredDeviceId,
+          },
+        });
+        return;
         const fileInput = document.createElement("input");
         fileInput.type = "file";
         fileInput.accept =

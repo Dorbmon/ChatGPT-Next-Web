@@ -9,7 +9,9 @@ console.log("[Next] build with chunk: ", !disableChunk);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
+    NEXT_PUBLIC_BUILD_TIME: new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Shanghai",
+    }),
   },
   webpack(config) {
     config.module.rules.push({
