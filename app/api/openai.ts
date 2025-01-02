@@ -58,8 +58,11 @@ export async function handle(
   }
 
   try {
+    console.log("Before request");
+    // const before = Date.now();
     const response = await requestOpenai(req);
-
+    // console.log("After request", Date.now() - before);
+    // console.log("RX Response: ", await response.text());
     // list models
     if (subpath === OpenaiPath.ListModelPath && response.status === 200) {
       const resJson = (await response.json()) as OpenAIListModelResponse;
@@ -75,3 +78,4 @@ export async function handle(
     return NextResponse.json(prettyObject(e));
   }
 }
+export const maxDuration = 60;
