@@ -238,7 +238,7 @@ export class ChatGPTApi implements LLMApi {
       if (isO1) {
         requestPayload["max_completion_tokens"] = Math.max(
           modelConfig.max_tokens,
-          16384,
+          25000,
         );
       }
 

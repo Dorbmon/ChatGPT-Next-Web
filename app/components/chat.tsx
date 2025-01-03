@@ -1055,9 +1055,12 @@ function _Chat() {
       }
     }
   };
-
+  const showedThisTime = useRef(false);
   const doSubmit = (userInput: string) => {
-    toast("刘子阳真是爱江晨成！！！");
+    if (!showedThisTime.current) {
+      toast("刘子阳真是爱江晨成！！！");
+      showedThisTime.current = false;
+    }
     if (userInput.trim() === "" && isEmpty(attachImages)) return;
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
