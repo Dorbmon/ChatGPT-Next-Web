@@ -8,6 +8,7 @@ import React, {
   Fragment,
   RefObject,
 } from "react";
+import Gongdeicon from "@/public/gongde.jpg";
 import { toast, ToastContainer } from "react-toastify";
 import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
@@ -125,6 +126,7 @@ import { isEmpty } from "lodash-es";
 import { getModelProvider } from "../utils/model";
 import { RealtimeChat } from "@/app/components/realtime-chat";
 import clsx from "clsx";
+import Image from "next/image";
 
 const localStorage = safeLocalStorage();
 
@@ -1055,12 +1057,10 @@ function _Chat() {
       }
     }
   };
-  const showedThisTime = useRef(false);
   const doSubmit = (userInput: string) => {
-    if (!showedThisTime.current) {
-      toast("刘子阳真是爱江晨成！！！");
-      showedThisTime.current = false;
-    }
+    toast("永远在一起", {
+      icon: ({}) => <Image src={Gongdeicon} alt="功德+1"></Image>,
+    });
     if (userInput.trim() === "" && isEmpty(attachImages)) return;
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
